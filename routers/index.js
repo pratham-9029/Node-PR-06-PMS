@@ -9,13 +9,13 @@ router.use('/admin', adminRouter);
 
 
 // admin login
-const admins = [
+const admins = 
     {
         username: "admin",
         password: "admin@123"
     }
-]
-authModel.create(admins);
+
+// authModel.create(admins);
 
 
 
@@ -26,10 +26,11 @@ router.get('/', (req, res) => {
 
 });
 router.post('/', async (req, res) => {
-    if (authModel.find(req.body)) {
-        if (req.body.username === authModel.username && req.body.password === authModel.password) {
-            res.redirect('/admin');
-        }
+
+    if (req.body.username === admins.username && req.body.password === admins.password) {
+        res.redirect('/admin');
+    } else if (req.body.username === authModel.username && req.body.password === authModel.password) {
+        res.redirect('/user');
     } else {
         console.log("Invalid Username or Password");
         res.redirect('/');
